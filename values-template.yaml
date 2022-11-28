@@ -1,0 +1,109 @@
+vvp:
+  blobStorage:
+    # baseUri: gs://pwm-lowa/vvp
+    baseUri: gs://$bucket
+
+  flinkVersionMetadata:
+  - flinkImageRegistry: hellof20
+    flinkImageRepository: flink
+    flinkVersion: 1.14.3
+    imageTag: 1.14.3-stream1-scala_2.12-java11-gcs
+    useForSqlDeployments: true
+    defaultFor:
+    - 1.14
+
+  globalDeploymentDefaults: |
+    spec:
+      template:
+        spec:
+          kubernetes:
+            jobManagerPodTemplate:
+              spec:
+                initContainers:
+                  - name: artifact-fetcher
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /flink/gcs-creds/gcs-key.json
+                    volumeMounts:
+                      - name: gcs-key
+                        mountPath: /flink/gcs-creds
+                containers:
+                  - name: flink-jobmanager
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /flink/gcs-creds/gcs-key.json
+                    volumeMounts:
+                      - name: gcs-key
+                        mountPath: /flink/gcs-creds
+                volumes:
+                  - name: gcs-key
+                    secret:
+                      secretName: gcs-key
+            taskManagerPodTemplate:
+              spec:
+                initContainers:
+                  - name: artifact-fetcher
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /flink/gcs-creds/gcs-key.json
+                    volumeMounts:
+                      - name: gcs-key
+                        mountPath: /flink/gcs-creds
+                containers:
+                  - name: flink-taskmanager
+                    env:
+                      - name: GOOGLE_APPLICATION_CREDENTIALS
+                        value: /flink/gcs-creds/gcs-key.json
+                    volumeMounts:
+                      - name: gcs-key
+                        mountPath: /flink/gcs-creds
+                volumes:
+                  - name: gcs-key
+                    secret:
+                      secretName: gcs-key
+
+
+  globalSessionClusterDefaults: |
+    spec:
+      kubernetes:
+        jobManagerPodTemplate:
+          spec:
+            containers:
+              - name: flink-jobmanager
+                env:
+                  - name: GOOGLE_APPLICATION_CREDENTIALS
+                    value: /flink/gcs-creds/gcs-key.json
+                volumeMounts:
+                  - name: gcs-key
+                    mountPath: /flink/gcs-creds
+            volumes:
+              - name: gcs-key
+                secret:
+                  secretName: gcs-key
+        taskManagerPodTemplate:
+          spec:
+            containers:
+              - name: flink-taskmanager
+                env:
+                  - name: GOOGLE_APPLICATION_CREDENTIALS
+                    value: /flink/gcs-creds/gcs-key.json
+                volumeMounts:
+                  - name: gcs-key
+                    mountPath: /flink/gcs-creds
+            volumes:
+              - name: gcs-key
+                secret:
+                  secretName: gcs-key
+
+volumes:
+  - name: "gcs-key"
+    secret:
+      secretName: "gcs-key"
+
+volumeMounts:
+  - name: "gcs-key"
+    mountPath: "/vvp/gcs-creds"
+
+env:
+  - name:  "GOOGLE_APPLICATION_CREDENTIALS"
+    value: "/vvp/gcs-creds/gcs-key.json"

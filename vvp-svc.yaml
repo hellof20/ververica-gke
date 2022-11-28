@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vvp-svc
+spec:
+  type: LoadBalancer
+  ports:
+  - name: appmanager
+    port: 80
+    targetPort: 8080
+  selector:
+    app: vvp-ververica-platform
