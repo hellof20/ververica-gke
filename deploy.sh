@@ -42,3 +42,16 @@ helm --namespace vvp install vvp ververica/ververica-platform --set acceptCommun
 
 echo "expose as load balance"
 kubectl --namespace vvp apply -f vvp-svc.yaml
+waitTime=0
+until [ $(kubectl -n vvp get svc vvp-svc -o jsonpath='{.status.loadBalancer.ingress[0].ip}') ]; do
+    sleep 10;
+    waitTime=$(expr ${waitTime} + 10)
+    echo "waited ${waitTime} secconds for vvp svc to be ready ..."
+    if [ ${waitTime} -gt 300 ]; then
+        echo "wait too long, failed."
+        return 1
+    fi
+done
+vvp_external_ip=$(kubectl -n ${namespace} get svc mysql -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+echo "vvp external ip is ${vvp_external_ip}"
+
