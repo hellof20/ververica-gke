@@ -64,6 +64,6 @@ until [ $(kubectl -n vvp get svc vvp-svc -o jsonpath='{.status.loadBalancer.ingr
         return 1
     fi
 done
-vvp_external_ip=$(kubectl -n ${namespace} get svc mysql -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+vvp_external_ip=$(kubectl -n vvp get svc vvp-svc -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 echo "vvp external ip is ${vvp_external_ip}"
 
