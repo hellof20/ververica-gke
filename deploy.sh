@@ -11,11 +11,9 @@ gcloud iam service-accounts create gcs-vvp-service-acc \
 --quiet
 
 echo "get service account json"
-keyid=$(gcloud iam service-accounts keys list --iam-account=gcs-vvp-service-acc@speedy-victory-336109.iam.gserviceaccount.com --format="csv[no-heading](name)")
-gcloud beta iam service-accounts keys get-public-key $keyid \
+gcloud iam service-accounts keys create gcs-key.json \
     --iam-account=gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com \
-    --output-file=gcs-key.json \
-    --project=$project_id \
+    --key-file-type json
     --quiet
 
 echo "asign permission to iam sa"
