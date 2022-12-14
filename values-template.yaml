@@ -6,11 +6,11 @@ vvp:
   flinkVersionMetadata:
   - flinkImageRegistry: hellof20
     flinkImageRepository: flink
-    flinkVersion: 1.14.3
-    imageTag: 1.14.3-stream1-scala_2.12-java11-gcs
+    flinkVersion: 1.15.2
+    imageTag: 1.15.2-stream4-scala_2.12-java11
     useForSqlDeployments: true
     defaultFor:
-    - 1.14
+    - 1.15
 
   globalDeploymentDefaults: |
     spec:
