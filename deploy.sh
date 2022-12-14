@@ -7,17 +7,22 @@ echo "create iam service account"
 gcloud iam service-accounts create gcs-vvp-service-acc \
 --description="Service account for VVP GCS" \
 --display-name="gcs-vvp-service-acc" \
---project=$project_id
+--project=$project_id \
+--quiet
 
 echo "get service account json"
 keyid=$(gcloud iam service-accounts keys list --iam-account=gcs-vvp-service-acc@speedy-victory-336109.iam.gserviceaccount.com --format="csv[no-heading](name)")
 gcloud beta iam service-accounts keys get-public-key $keyid \
     --iam-account=gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com \
     --output-file=gcs-key.json \
-    --project=$project_id
+    --project=$project_id \
+    --quiet
 
 echo "asign permission to iam sa"
-gcloud projects add-iam-policy-binding $project_id --member=serviceAccount:gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com --role=roles/storage.admin
+gcloud projects add-iam-policy-binding $project_id \
+--member=serviceAccount:gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com \
+--role=roles/storage.admin \
+--quiet
 
 echo "create gke"
 gcloud container clusters create $name \
@@ -26,7 +31,8 @@ gcloud container clusters create $name \
     --machine-type=e2-standard-4 \
     --num-nodes=1 \
     --zone $zone \
-    --project=$project_id
+    --project=$project_id \
+    --quiet
 
 echo "create vvp namespace"
 kubectl create namespace vvp
