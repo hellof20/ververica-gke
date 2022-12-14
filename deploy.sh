@@ -28,6 +28,7 @@ gcloud container clusters create $name \
     --no-enable-autoupgrade \
     --machine-type=e2-standard-4 \
     --num-nodes=1 \
+    --network $network \    
     --zone $zone \
     --project=$project_id \
     --quiet
