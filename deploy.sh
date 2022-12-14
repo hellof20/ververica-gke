@@ -13,7 +13,7 @@ gcloud iam service-accounts create gcs-vvp-service-acc \
 echo "get service account json"
 gcloud iam service-accounts keys create gcs-key.json \
     --iam-account=gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com \
-    --key-file-type json
+    --key-file-type json \
     --quiet
 
 echo "asign permission to iam sa"
