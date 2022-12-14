@@ -33,6 +33,12 @@ gcloud container clusters create $name \
     --zone $zone \
     --project=$project_id \
     --quiet
+    
+echo "get gke credential"
+gcloud container clusters get-credentials $name \
+    --zone $zone \
+    --project=$project_id \
+    --quiet
 
 echo "create vvp namespace"
 kubectl create namespace vvp
