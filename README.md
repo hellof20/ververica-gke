@@ -7,9 +7,12 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
 ## Deploy
 
 ### Prerequisite
-- gcloud command line
-- Helm
-- you have permission to create GKE cluster, GCS bucket and IAM service account
+- You must have Google Cloud permissions to create GKE cluster, GCS bucket and IAM service account.
+- Command line tools
+    - gcloud
+    - helm
+    - git
+    - kubectl
 
 ### Set environment variable
 ```
@@ -31,11 +34,13 @@ gcloud iam service-accounts create gcs-vvp-service-acc \
 --description="Service account for VVP GCS" \
 --display-name="gcs-vvp-service-acc" \
 --project=$project_id 
-
+```
+```
 gcloud iam service-accounts keys create gcs-key.json \
     --iam-account=gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com \
     --key-file-type json
-
+```
+```
 gcloud projects add-iam-policy-binding $project_id \
 --member=serviceAccount:gcs-vvp-service-acc@$project_id.iam.gserviceaccount.com \
 --role=roles/storage.admin
