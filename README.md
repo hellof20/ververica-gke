@@ -8,8 +8,8 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
 
 ### Prerequisite
 - gcloud command line
-- helm
-- envsubst
+- Helm
+- you have permission to create GKE cluster and IAM service account
 
 ### Set environment variable
 ```
@@ -53,7 +53,7 @@ gcloud container clusters create $name \
     --project=$project_id
  ```
  
-### Get the GKE cluster credential
+### Get the GKE cluster credential after cluster create finished
 ```
 gcloud container clusters get-credentials $name \
     --zone $zone \
