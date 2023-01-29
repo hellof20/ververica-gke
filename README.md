@@ -9,7 +9,7 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
 ### Prerequisite
 - gcloud command line
 - Helm
-- you have permission to create GKE cluster and IAM service account
+- you have permission to create GKE cluster, GCS bucket and IAM service account
 
 ### Set environment variable
 ```
@@ -82,7 +82,7 @@ helm --namespace vvp install vvp ververica/ververica-platform --set acceptCommun
 kubectl --namespace vvp apply -f vvp-svc.yaml
 ```
 
-### Get the load balance ip address and access it.
+### Get the load balance ip address and access it from web browser
 ```
 vvp_external_ip=$(kubectl -n vvp get svc vvp-svc -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 echo "Access your VVP: http://${vvp_external_ip}"
