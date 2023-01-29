@@ -1,4 +1,4 @@
-# Deploy Ververica platform on GKE
+# Deploy Ververica Platform on GKE
 
 [Ververica Platform](https://www.ververica.com/) is an integrated platform for stateful stream processing and streaming analytics with Open Source Apache Flink. It enables organizations of any size to derive immediate insight from their data and serve internal and external stakeholders.
 
