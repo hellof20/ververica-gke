@@ -87,4 +87,10 @@ kubectl --namespace vvp apply -f vvp-svc.yaml
 vvp_external_ip=$(kubectl -n vvp get svc vvp-svc -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
 echo "Access your VVP: http://${vvp_external_ip}"
 ```
+![image](https://user-images.githubusercontent.com/8756642/215326077-128eff1e-a078-45a4-a8d9-957204adcf31.png)
+
 ## Useage
+
+### [Getting Started - Flink SQL](https://docs.ververica.com/getting_started/sql_development.html)
+
+### [Getting Started - Flink Operations](https://docs.ververica.com/getting_started/flink_operations.html)
