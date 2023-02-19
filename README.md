@@ -92,6 +92,8 @@ helm --namespace vvp install vvp ververica/ververica-platform --set acceptCommun
 ```
 kubectl --namespace vvp apply -f vvp-svc.yaml
 ```
+### Wait a minute until vvp deployment and svc is running
+![image](https://user-images.githubusercontent.com/8756642/219956918-b80425ef-b347-48c9-80d5-d4bdbacedd22.png)
 
 ### Get the load balance ip address and access it from web browser
 ```
