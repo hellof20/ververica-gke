@@ -25,7 +25,7 @@ zone=us-central1-a
 
 ### Create a GCS bucket, in order to enable universal blob storage
 ```
-gcloud storage buckets create gs://ververica-$project_id-`date` --project=$project_id
+gcloud storage buckets create gs://$bucket --project=$project_id
 ```
 
 ### Create iam service account and assign permission to it
