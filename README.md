@@ -81,6 +81,8 @@ kubectl create secret generic gcs-key --from-file=./gcs-key.json -n vvp
 
 ### Deploy Ververica Platform Community Edition with Helm
 ```
+git clone https://github.com/hellof20/ververica-gke.git
+cd ververica-gke
 envsubst < values-template.yaml > values.yaml
 helm repo add ververica https://charts.ververica.com
 helm --namespace vvp install vvp ververica/ververica-platform --set acceptCommunityEditionLicense=true --values values.yaml
