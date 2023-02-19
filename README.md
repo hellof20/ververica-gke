@@ -13,19 +13,19 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
     - helm
     - git
     - kubectl
+- Update org policy(only for Aroglis users)
+    - constraints/iam.disableServiceAccountKeyCreation to Not enforced
 
 ### Set environment variable
 ```
-name=gke_cluster_name
 project_id=your_project_id
-bucket=bucket_name
+bucket=your-bucket-name
 zone=us-central1-a
-network=gcp_network_name
 ```
 
 ### Create a GCS bucket, in order to enable universal blob storage
 ```
-gcloud storage buckets create gs://$bucket --project=$project_id
+gcloud storage buckets create gs://ververica-$project_id-`date` --project=$project_id
 ```
 
 ### Create iam service account and assign permission to it
@@ -48,19 +48,21 @@ gcloud projects add-iam-policy-binding $project_id \
 
 ### Create a GKE cluster
 ```
-gcloud container clusters create $name \
+gcloud compute networks create ververica-demo-network --subnet-mode=auto
+gcloud services enable container
+gcloud container clusters create ververica-demo \
     --cluster-version=1.23 \
     --no-enable-autoupgrade \
     --machine-type=e2-standard-4 \
     --num-nodes=1 \
-    --network $network \
+    --network ververica-demo-network \
     --zone $zone \
     --project=$project_id
  ```
  
 ### Get the GKE cluster credential after cluster create finished
 ```
-gcloud container clusters get-credentials $name \
+gcloud container clusters get-credentials ververica-demo \
     --zone $zone \
     --project=$project_id
 ```
