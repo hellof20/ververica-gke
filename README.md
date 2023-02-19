@@ -21,7 +21,7 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
 ### Set environment variable
 ```
 export project_id=your_project_id
-export bucket=your-bucket-name
+export bucket=bucket-name-for-ververica
 export zone=us-central1-a
 ```
 
