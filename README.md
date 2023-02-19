@@ -16,11 +16,11 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
 
 ### Set environment variable
 ```
-name = gke_cluster_name
-project_id = your_project_id
-bucket = bucket_name
-zone = us-central1-a
-network = gcp_network_name
+name=gke_cluster_name
+project_id=your_project_id
+bucket=bucket_name
+zone=us-central1-a
+network=gcp_network_name
 ```
 
 ### Create a GCS bucket, in order to enable universal blob storage
