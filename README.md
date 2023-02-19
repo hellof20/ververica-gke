@@ -20,9 +20,9 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
 
 ### Set environment variable
 ```
-project_id=your_project_id
-bucket=your-bucket-name
-zone=us-central1-a
+export project_id=your_project_id
+export bucket=your-bucket-name
+export zone=us-central1-a
 ```
 
 ### Create a GCS bucket, in order to enable universal blob storage
