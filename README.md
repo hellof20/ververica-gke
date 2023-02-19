@@ -13,8 +13,10 @@ This demo is helps to deploy Ververica Platform [Community Edition](https://www.
     - helm
     - git
     - kubectl
-- Update org policy(only for Aroglis users)
+- Change org policy(only for Aroglis users)
     - constraints/iam.disableServiceAccountKeyCreation to Not enforced
+    - constraints/compute.requireShieldedVm to Not enforced
+    - constraints/compute.vmExternalIpAccess to allow all
 
 ### Set environment variable
 ```
